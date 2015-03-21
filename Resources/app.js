@@ -43,11 +43,10 @@ var startButton = Ti.UI.createLabel({
 	textAlign: "center"
 });
 
-var getImages = function(){
-	var loadFile = require("gallery");
+var getImage = function(){
+	var openFile = require("gallery");
 };
 
-startButton.addEventListener("click", getImages);
-
+startButton.addEventListener("click", getImage);
 mainWindow.add(startButton, titleImage, titleLabel, border);
 mainWindow.open();

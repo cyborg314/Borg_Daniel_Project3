@@ -1,5 +1,6 @@
 var pWidth = Ti.Platform.displayCaps.platformWidth;
 var pHeight = Ti.Platform.displayCaps.platformHeight;
+var imagesFiles = 30;
 var rowCount = 4;
 var margin = 10;
 var trueCanvasWidth = pWidth - margin * (rowCount+1);
@@ -26,7 +27,7 @@ var border = Ti.UI.createView({
 	top: 0
 });
 
-var backButton = Ti.UI.createLabel({
+var closeButton = Ti.UI.createLabel({
 	bottom: 0,
 	height: 50,
 	width: "100%",
@@ -37,20 +38,20 @@ var backButton = Ti.UI.createLabel({
 });
 
 var closeGallery = function(){
-	var startOver = require("app");
-	mainWindow.open();
-	navWindow.close();
-};
-
-//backButton.add(backButtonLabel);
-backButton.addEventListener("click", closeGallery);
-navWindow.add(backButton);
+	//var startOver = require("app");
+	mainWindow.open();         
+	navWindow.close();                              
+ };
+ 									 											
+                                            												
+closeButton.addEventListener("click", closeGallery);
+navWindow.add(closeButton);
 
 var viewContainer = Ti.UI.createScrollView({
 	top: 0,
 	layout: "horizontal",
 	width: pWidth,
-	height: pHeight-border.height-border.top-backButton.height-60,
+	height: pHeight-border.height-border.top-closeButton.height-60,
 	contentWidth: pWidth,
 	showVerticalScrollIndicator: true,
 	backgroundColor: "#fef", 
@@ -59,7 +60,7 @@ var viewContainer = Ti.UI.createScrollView({
 
 galleryWindow.add(border, viewContainer);
 
-var getImage = function(){
+var getImage = function(){            
 	var imageWindow = Ti.UI.createWindow({
 		title: this.image,
 		backgroundColor: "#cecece"
@@ -83,17 +84,21 @@ for(var i=0; i<imageFiles.length; i++){
 		top: margin,
 		left: margin,
 		width: size,
-		height: size
+		height: size,
+		child: true
 	});
+	
 	var thumb = Ti.UI.createImageView({
 		image: "images/" + imageFiles[i],
 		width: view.width*2
 	});
-	
+ 	
 	view.add(thumb);
 	viewContainer.add(view);
 	thumb.addEventListener("click", getImage);
-}
+};
+
 
 navWindow.add(galleryWindow);
 navWindow.open();
+
